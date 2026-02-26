@@ -38,9 +38,9 @@ impl TryFrom<&str> for PfSenseAliasHostValue {
 impl fmt::Display for PfSenseAliasHostValue {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            PfSenseAliasHostValue::Address(ip) => write!(f, "{ip}"),
-            PfSenseAliasHostValue::FQDN(fqdn) => write!(f, "{fqdn}"),
-            PfSenseAliasHostValue::AliasName(alias) => write!(f, "{alias}"),
+            Self::Address(ip) => write!(f, "{ip}"),
+            Self::FQDN(fqdn) => write!(f, "{fqdn}"),
+            Self::AliasName(alias) => write!(f, "{alias}"),
         }
     }
 }
