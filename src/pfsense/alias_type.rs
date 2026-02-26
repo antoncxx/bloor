@@ -1,7 +1,10 @@
 use std::fmt;
 use std::io;
+use std::str;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, Hash)]
 pub enum AliasType {
     Host,
     Network,
@@ -45,5 +48,13 @@ impl fmt::Display for AliasType {
         };
 
         write!(f, "{}", s)
+    }
+}
+
+impl str::FromStr for AliasType {
+    type Err = io::Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Self::try_from(s)
     }
 }
