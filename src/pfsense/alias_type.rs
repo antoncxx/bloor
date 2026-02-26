@@ -5,7 +5,7 @@ use std::str;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, Hash)]
-pub enum AliasType {
+pub enum PfSenseAliasType {
     Host,
     Network,
     Port,
@@ -15,7 +15,7 @@ pub enum AliasType {
     UrlTablePorts,
 }
 
-impl TryFrom<&str> for AliasType {
+impl TryFrom<&str> for PfSenseAliasType {
     type Error = io::Error;
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
@@ -35,23 +35,23 @@ impl TryFrom<&str> for AliasType {
     }
 }
 
-impl fmt::Display for AliasType {
+impl fmt::Display for PfSenseAliasType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = match self {
-            AliasType::Host => "host",
-            AliasType::Network => "network",
-            AliasType::Port => "port",
-            AliasType::UrlIps => "url",
-            AliasType::UrlPorts => "url_ports",
-            AliasType::UrlTableIps => "urltable",
-            AliasType::UrlTablePorts => "urltable_ports",
+            Self::Host => "host",
+            Self::Network => "network",
+            Self::Port => "port",
+            Self::UrlIps => "url",
+            Self::UrlPorts => "url_ports",
+            Self::UrlTableIps => "urltable",
+            Self::UrlTablePorts => "urltable_ports",
         };
 
         write!(f, "{}", s)
     }
 }
 
-impl str::FromStr for AliasType {
+impl str::FromStr for PfSenseAliasType {
     type Err = io::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
